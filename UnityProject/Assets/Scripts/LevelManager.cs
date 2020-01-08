@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;//引用 場景管理API
 using System.Collections;
 
 public class LevelManager : MonoBehaviour
@@ -26,24 +27,47 @@ public class LevelManager : MonoBehaviour
         if (autoOpenDool) Invoke("OpenDoor", 6);    // 延遲調用(方法，延遲時間)
     }
 
+    /// <summary>
+    /// 顯示技能
+    /// </summary>
     private void ShowSkill()
     {
         randomSkill.SetActive(true);
     }
 
+    /// <summary>
+    /// 開門並顯示光照
+    /// </summary>
     private void OpenDoor()
     {
         objLight.SetActive(true);
         door.SetTrigger("開門觸發");
     }
 
+    /// <summary>
+    /// 載入下一關
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator NextLevel()
     {
-        print("載入下一關");
+        //載入下一關
+        //SceneManager.LoadScene("場景名稱"); //場景管理氣.載入場景("場景名稱")
 
-        // 迴圈 for while
-        // 0.01 透明度 + 0.01
-        imgCross.color += new Color(1, 1, 1, 0.01f);
-        yield return new WaitForSeconds(0.01f);
+        AsyncOperation async = SceneManager.LoadSceneAsync("關卡2");   //場景管理器.非同步載入場景("場景名稱")
+
+        //不允許直接載入
+        async.allowSceneActivation = false;
+
+
+        for (int i = 0; i < 100; i++)               //迴圈 for while
+        {
+            imgCross.color += new Color(1, 1, 1, 0.01f);   //0.01透明度+0.01
+            yield return new WaitForSeconds(0.01f);        //等待0.01秒
+        }
+
+        //允許直接載入
+        async.allowSceneActivation = true;
+
+
     }
 }
