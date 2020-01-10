@@ -14,7 +14,8 @@ public class EnemyData : ScriptableObject
     public float cd;
     [Header("移動速度"), Range(0, 1000)]
     public float speed;
-
+    [Header("停止距離"), Range(0, 1000)]
+    public float stopDistance;
 
 
 }
