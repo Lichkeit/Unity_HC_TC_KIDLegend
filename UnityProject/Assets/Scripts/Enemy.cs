@@ -37,6 +37,11 @@ public class Enemy : MonoBehaviour
         //代理器.設定目的地(玩家.座標)
         agent.SetDestination(target.position);
 
+
+        Vector3 targetPos = target.position; //區域變數 目標座標=玩家.座標
+        targetPos.y = transform.position.y;  //目標座標.y=自己.y
+        transform.LookAt(targetPos);         //看著
+
         //remainingDisance 跟目標的距離
         //如果 進入 停止距離範圍內就等待 否則 跑步
         if (agent.remainingDistance<agent.stoppingDistance)
@@ -69,7 +74,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// 攻擊
     /// </summary>
-    private void Attack()
+    protected virtual void Attack()
     {
         timer = 0;                        //歸零
         ani.SetTrigger("攻擊觸發");       //攻擊動畫
