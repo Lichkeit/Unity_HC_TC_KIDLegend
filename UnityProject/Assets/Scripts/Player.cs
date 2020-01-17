@@ -61,4 +61,29 @@ public class Player : MonoBehaviour
         posTarget.y = posPlayer.y;      // 目標 Y = 玩家 Y (避免吃土)
         transform.LookAt(posTarget);    // 看著(目標座標)
     }
+
+    /// <summary>
+    /// 受傷
+    /// </summary>
+    /// <param name="damage">接受傷害值</param>
+    public void Hit(float damage)
+    {
+        data.hp -= damage;
+        HpDamageManager.UpdateHpBar(data.hp, data.hpMax);
+
+
+        //啟動協程(血量傷害值管理器.顯示數值(傷害值 ， - ， 1 ， 白色))
+        StartCoroutine(HpDamageManager.ShowValue(damage, "-", Vector3.one, Color.white));
+
+        if (data.hp <= 0) Dead();
+
+    }
+
+    private void Dead()
+    {
+        ani.SetBool("死亡開關", true);
+
+        //this.enabled=false;
+        enabled = false;           //取消此類別運作
+    }
 }

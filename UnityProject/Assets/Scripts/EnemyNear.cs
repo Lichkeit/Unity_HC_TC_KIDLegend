@@ -39,7 +39,7 @@ public class EnemyNear : Enemy
         //物理.射線碰撞(中心點,方向,碰撞資訊,長度)
         if (Physics.Raycast(transform.position + data.nearAttackPos, transform.forward ,out hit,data.nearAttackLength))
         {
-            print("打到的物件:" + hit.collider.name);
+            hit.collider.GetComponent<Player>().Hit(data.attack);
         }
     }
 
