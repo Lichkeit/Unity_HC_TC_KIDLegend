@@ -85,5 +85,7 @@ public class Player : MonoBehaviour
 
         //this.enabled=false;
         enabled = false;           //取消此類別運作
+
+        StartCoroutine(levelManager.ShowRevival());
     }
 }

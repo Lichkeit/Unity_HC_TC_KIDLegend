@@ -16,7 +16,8 @@ MonoBehaviour:
   attack: 80
   cd: 3
   speed: 0
-  stopDistance: 0
-  nearAttackLength: 145
-  nearAttackPos: {x: 0, y: 0, z: 0}
-  nearAttackDelay: 0
+  stopDistance: 1000
+  nearAttackLength: 0
+  nearAttackPos: {x: 0, y: 2, z: 1}
+  nearAttackDelay: 0.5
+  farPower: 2500

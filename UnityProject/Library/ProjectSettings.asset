@@ -645,10 +645,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 9aac5ce0-52d4-4b49-9388-3b1f295c78cd
+  cloudProjectId: cdc38c4a-db25-4ef9-9be3-65d6cea3ae0f
   framebufferDepthMemorylessMode: 0
   projectName: UnityProject
-  organizationId: kid-studio
+  organizationId: owencas7
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
