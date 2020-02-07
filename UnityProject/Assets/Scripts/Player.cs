@@ -6,13 +6,17 @@ public class Player : MonoBehaviour
     public float speed = 10;
     [Header("玩家資料")]
     public PlayerData data;
+    [Header("武器")]
+    public GameObject bullet;
 
-    private Joystick joystick;  // 虛擬搖桿類別
-    private Rigidbody rig;      // 剛體
-    private Animator ani;               // 動畫控制器
-    private Transform target;           // 目標
-    private LevelManager levelManager;
-    private HpDamageManager HpDamageManager;
+    private Joystick joystick;               // 虛擬搖桿類別
+    private Rigidbody rig;                   // 剛體
+    private Animator ani;                    // 動畫控制器
+    private Transform target;                // 目標
+    private LevelManager levelManager;       //關卡管理器
+    private HpDamageManager HpDamageManager; //血量數值管理器
+    private float timer;                     //計時器
+
 
     private void Start()
     {
@@ -60,6 +64,8 @@ public class Player : MonoBehaviour
         target.position = posTarget;    // 目標物件.座標 = 計算後的座標
         posTarget.y = posPlayer.y;      // 目標 Y = 玩家 Y (避免吃土)
         transform.LookAt(posTarget);    // 看著(目標座標)
+
+        if (v == 0 && h == 0) Attack();
     }
 
     /// <summary>
@@ -79,6 +85,9 @@ public class Player : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 死亡
+    /// </summary>
     private void Dead()
     {
         ani.SetBool("死亡開關", true);
@@ -87,5 +96,37 @@ public class Player : MonoBehaviour
         enabled = false;           //取消此類別運作
 
         StartCoroutine(levelManager.ShowRevival());
+    }
+
+
+    /// <summary>
+    /// 復活
+    /// </summary>
+    public void Revival()
+    {
+        enabled = true;
+        ani.SetBool("死亡開關", false);
+        data.hp = data.hpMax;
+        HpDamageManager.UpdateHpBar(data.hp, data.hpMax);
+        levelManager.CloseRevival();
+    }
+
+    private void Attack()
+    {
+        if (timer<data.cd)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            timer = 0;
+        //座標=本身座標+上方*單位+前方*單位
+        Vector3 pos = transform.position + transform.up * 1 + transform.forward * 1.5f;
+        //角度=四元.歐拉(本身.X ， 本身.Y + 單位 ， 本身.Z + 單位)
+        Quaternion qua = Quaternion.Euler(transform.eulerAngles.x+180, transform.eulerAngles.y , transform.eulerAngles.z);
+        //生成(物件，座標，角度)
+        GameObject temp=Instantiate(bullet, pos, qua);
+        temp.GetComponent<Rigidbody>().AddForce(transform.forward * data.power);
+        }
     }
 }

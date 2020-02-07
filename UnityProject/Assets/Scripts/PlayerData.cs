@@ -13,6 +13,11 @@ public class PlayerData : ScriptableObject
 
     public float hpMax;
 
+    [Header("血量與最大血量"), Range(0, 1)]
+    public float cd = 0.8f;
+    [Header("武器速度"), Range(100, 5000)]
+    public float power = 500;
+
 
 
 

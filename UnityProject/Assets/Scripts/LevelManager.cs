@@ -74,6 +74,10 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 顯示復活介面並倒數三秒
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator ShowRevival()
     {
         panelRevival.SetActive(true);
@@ -82,6 +86,15 @@ public class LevelManager : MonoBehaviour
             panelRevival.transform.GetChild(1).GetComponent<Text>().text = i.ToString();
             yield return new WaitForSeconds(1);
         }
+    }
+
+    /// <summary>
+    /// 關閉復活介面
+    /// </summary>
+    public void CloseRevival()
+    {
+        StopCoroutine(ShowRevival());     //關閉協成
+        panelRevival.SetActive(false);    //關閉介面
     }
 
 }
