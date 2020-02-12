@@ -17,7 +17,8 @@ public class PlayerData : ScriptableObject
     public float cd = 0.8f;
     [Header("武器速度"), Range(100, 5000)]
     public float power = 500;
-
+    [Header("攻擊力"), Range(1, 5000)]
+    public float attack = 50;
 
 
 

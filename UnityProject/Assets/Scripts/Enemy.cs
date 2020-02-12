@@ -5,12 +5,15 @@ using UnityEngine.AI;  //引用 人工智慧 API
 public class Enemy : MonoBehaviour
 {
     [Header("敵人資料")]
-    public EnemyData data;
+    public EnemyData data;                   //每一隻怪物共用
 
     private Animator ani;
     private NavMeshAgent agent;
     private Transform target;
     private float timer;
+    private HpDamageManager HpDamageManager; //血量數值管理器
+    private float hp;                        //每一隻怪物獨立
+
 
 
     private void Start()
@@ -19,8 +22,11 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = data.speed;
         agent.stoppingDistance = data.stopDistance;
+        hp = data.hp;
 
         target = GameObject.Find("玩家").transform;
+        HpDamageManager = GetComponentInChildren<HpDamageManager>();
+
     }
 
 
@@ -34,6 +40,8 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Move()
     {
+        if (ani.GetBool("死亡開關")) return;
+        
         //代理器.設定目的地(玩家.座標)
         agent.SetDestination(target.position);
 
@@ -63,7 +71,7 @@ public class Enemy : MonoBehaviour
         ani.SetBool("跑步開關", false);  //等待動畫
         timer += Time.deltaTime;         //累加使間
 
-        print("計時器:" + timer);
+        //print("計時器:" + timer);
 
         if (timer>=data.cd)             //如果 計時器 >=冷卻時間
         {
@@ -84,9 +92,16 @@ public class Enemy : MonoBehaviour
     /// 受傷
     /// </summary>
     /// <param name="damage"></param>
-    private void Hit(float damage)
+    public void Hit(float damage)
     {
+        hp -= damage;
+        HpDamageManager.UpdateHpBar(hp, data.hpMax);
 
+
+        //啟動協程(血量傷害值管理器.顯示數值(傷害值 ， - ， 1 ， 白色))
+        StartCoroutine(HpDamageManager.ShowValue(damage, "-", Vector3.one, Color.white));
+
+        if (hp <= 0) Dead();
     }
 
     /// <summary>
@@ -94,7 +109,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-
+        ani.SetBool("死亡開關", true);
+        agent.isStopped = true;
+        Destroy(this);             //刪除元件  Destroy(GetComponent<指定元件>())
     }
 
     /// <summary>

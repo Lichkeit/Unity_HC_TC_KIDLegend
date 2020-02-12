@@ -30,5 +30,6 @@ public class EnemyFar : Enemy
 
         temp.AddComponent<Bullet>();                                                   //添加元件<泛型>
         temp.GetComponent<Bullet>().damage = data.attack;                              //設定子彈傷害=資料.攻擊力
+        temp.GetComponent<Bullet>().playerBullet = false;                              //設定子彈
     }
 }
