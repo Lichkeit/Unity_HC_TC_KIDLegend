@@ -22,3 +22,4 @@ MonoBehaviour:
   nearAttackPos: {x: 0, y: 2, z: 1}
   nearAttackDelay: 0.5
   farPower: 2500
+  coinRandom: {x: 10, y: 20}

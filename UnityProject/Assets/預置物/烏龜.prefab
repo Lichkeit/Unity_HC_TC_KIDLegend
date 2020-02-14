@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 5446837572436319806}
   - component: {fileID: 5446837572436319801}
   - component: {fileID: 5446837572436319800}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: "\u70CF\u9F9C"
   m_TagString: "\u6575\u4EBA"
   m_Icon: {fileID: 0}
@@ -806,6 +806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: eba612abda5122d429e6dbcea52d2683, type: 2}
+  coin: {fileID: 3872090829039593316, guid: 5c3f8337353007d4e8312606e44ac9e3, type: 3}
 --- !u!1 &5446901436003074233
 GameObject:
   m_ObjectHideFlags: 0

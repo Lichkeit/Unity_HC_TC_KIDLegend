@@ -30,5 +30,6 @@ public class EnemyData : ScriptableObject
 
     [Header("遠距離單位:發射子彈速度"), Range(0, 3000)]
     public float farPower;
-
+    [Header("掉落金幣數量")]
+    public Vector2 coinRandom;
 }

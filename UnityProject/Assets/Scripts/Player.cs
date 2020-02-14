@@ -114,6 +114,10 @@ public class Player : MonoBehaviour
         levelManager.CloseRevival();
     }
 
+
+    /// <summary>
+    /// 攻擊
+    /// </summary>
     private void Attack()
     {
         if (timer<data.cd)
@@ -126,7 +130,11 @@ public class Player : MonoBehaviour
             enemys = FindObjectsOfType<Enemy>();         //搜尋所有敵人
             enemysDistance = new float[enemys.Length];   //指定敵人距離陣列長度
 
-            if (enemys.Length == 0) return;
+            if (enemys.Length == 0)
+            {
+                levelManager.Pass();
+                return;
+            }
 
 
             timer = 0;                          //計時器歸零
