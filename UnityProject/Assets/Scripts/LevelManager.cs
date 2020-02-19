@@ -53,10 +53,27 @@ public class LevelManager : MonoBehaviour
     /// <returns></returns>
     public IEnumerator NextLevel()
     {
+
         //載入下一關
         //SceneManager.LoadScene("場景名稱"); //場景管理氣.載入場景("場景名稱")
 
-        AsyncOperation async = SceneManager.LoadSceneAsync("關卡2");   //場景管理器.非同步載入場景("場景名稱")
+        AsyncOperation async;
+
+
+        if (SceneManager.GetActiveScene().name.Contains("魔王"))
+        {
+            async = SceneManager.LoadSceneAsync(0);
+        }
+
+        else
+        {
+            //目前場警.編號
+            int index = SceneManager.GetActiveScene().buildIndex;
+
+
+             async = SceneManager.LoadSceneAsync(++index);   //場景管理器.非同步載入場景("場景名稱")
+                
+        }
 
         //不允許直接載入
         async.allowSceneActivation = false;

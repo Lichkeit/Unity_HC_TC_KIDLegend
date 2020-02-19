@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bca35675c3bc1408bf66f9a2414d4d, type: 3}
+  m_Name: "\u98DB\u9F8D\u9B54\u738B"
+  m_EditorClassIdentifier: 
+  hp: 3000
+  hpMax: 3000
+  attack: 500
+  cd: 1
+  speed: 0
+  stopDistance: 1000
+  nearAttackLength: 0
+  nearAttackPos: {x: 0, y: 3, z: 5}
+  nearAttackDelay: 0.5
+  farPower: 2500
+  coinRandom: {x: 10, y: 20}

@@ -55,6 +55,8 @@ public class Item : MonoBehaviour
             Physics.IgnoreLayerCollision(10, 10);
             transform.position = Vector3.Lerp(transform.position, player.position, 0.7f * Time.deltaTime * 20);
 
+
+            //如果 距離 < 2  並且 喇吧 沒有撥放音效
             if (Vector3.Distance(transform.position,player.position)<2 && !aud.isPlaying)
             {
                 aud.PlayOneShot(sound, 0.3f);
